@@ -51,15 +51,28 @@ class MoviesTableViewController: UITableViewController {
         return movies.count
     }
 
-    /*
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! MovieViewController
+        guard let row = tableView.indexPathForSelectedRow?.row else {return}
+        let movie = movies[row]
+        vc.movie = movie
+        
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "movieCell", for: indexPath) as! MovieTableViewCell
+        
+        let movie = movies[indexPath.row]
+        
+        cell.prepare(with: movie)
+        
+        
         // Configure the cell...
 
         return cell
     }
-    */
+
 
     /*
     // Override to support conditional editing of the table view.
